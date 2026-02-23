@@ -1,0 +1,188 @@
+# THE TOWER — Stamp Entry Drafts
+## Neill Groom — February 22, 2026
+## Prior Art Descriptions for Cryptographic Timestamping
+
+*Each entry below is drafted to be submitted to The Tower for SHA-256 hashing,
+Merkle tree batching, and Bitcoin blockchain anchoring.*
+
+*Format: [CATEGORY] Entry description. Concise, factual, timestampable.*
+
+---
+
+## FOUNDING DOCUMENTS (Already .ots stamped Feb 8, 2026 — re-stamp for Tower record)
+
+### ENTRY F-1: The Tower — Platform Concept
+[disclosure]
+I, Neill Groom, conceived and documented "The Tower" — a text-message-based idea timestamping platform that SHA-256 hashes user-submitted ideas, batches them into Merkle trees, and anchors the Merkle roots to the Bitcoin blockchain via OpenTimestamps. Users submit ideas via SMS to a phone number. Entries cost 50 cents each (credit packs via Stripe with Apple Pay/Google Pay). Verified proof receipts cost $5 and contain the entry text, SHA-256 hashes, Merkle proof path, and Bitcoin block reference for independent verification. The system uses two hash layers: hash_text (SHA-256 of raw text) and hash_bound (SHA-256 of text|timestamp|phone_hash) binding content to time and identity. Nothing is ever deleted. The Tower records; it doesn't judge. Entry Zero is The Tower itself — a performative proof where the system that proves ideas are original is proven necessary by being original itself. Conceived February 8, 2026 ~04:30 AM EST. Founding document, transcript, and token economics authored same session.
+
+### ENTRY F-2: Synthetic Dialectic — New Scholarly Discipline
+[disclosure]
+I, Neill Groom, conceived and defined "Synthetic Dialectic" — a formal methodology for recorded human-AI investigative discourse where the raw conversation transcript IS the scholarly artifact (not a paper about the conversation). The methodology features fluid role exchange: the human provides domain expertise, conviction, and directional intuition; the AI provides systematic research, synthesis, and verification. Published for community analysis and refutation. Verified as novel through extensive prior art search against existing disciplines including Socratic dialogue, dialectical materialism, action research, and computational rhetoric — none combine recorded AI dialogue, raw transcript as artifact, and formal methodology. Conceived February 7-8, 2026 during a 7,500+ line conversation session.
+
+### ENTRY F-3: TOWER Token — Revenue-Participation Digital Security
+[disclosure]
+I, Neill Groom (CFA, EA), designed the TOWER token financial architecture — a revenue-participation digital security (not utility, not governance) with 1 billion fixed supply, 30% of gross platform revenue distributed quarterly to token holders in USDC or BTC. Token allocation: 25% founder (4-year vest), 15% team, 20% public sale, 5% advisors, 20% treasury, 10% ecosystem, 5% reserve. Three-series fundraising: Seed ($0.01/token, Reg D), Growth ($0.10/token, Reg A+), Infrastructure ($1.00/token). Treated as securities from day one with full KYC/AML and 1099-DIV equivalent distributions. Revenue streams: entry fees ($0.10-$1.00), enterprise data access ($9.99-$9,999+/mo), API licensing, premium features. Designed February 8, 2026.
+
+---
+
+## PLATFORM ARCHITECTURE (Patent Claims P-1 through P-12)
+
+### ENTRY P-1: Weakness-Aware Content Generation for Incidental Learning
+[claim]
+I, Neill Groom, designed and implemented a method for dynamically generating reading passages that embed linguistic structures corresponding to a learner's identified weaknesses — without explicitly identifying the target structures to the learner. The system: (a) maintains a real-time learner weakness profile derived from interaction history stored in a semantic memory system with 8 categories; (b) generates natural language text using Claude Sonnet that embeds linguistic structures (comma splices, subject-verb agreement, transitions) corresponding to identified weaknesses; (c) presents the text as a comprehension exercise where grammar reinforcement is incidental; (d) optionally identifies one embedded structure after engagement via a coaching note. Validated with 4 student profiles at ~92% pattern match rate. Implemented in Cicero (SAT Reading & Writing tutor) and architecturally ready for Lengua (language learning). No existing platform dynamically generates authentic text that covertly embeds target structures based on real-time weakness data — Knewton serves pre-authored content, Duolingo uses explicit drill. First implemented February 2026.
+
+### ENTRY P-2: Pre-Deployment Mathematical Verification of LLM-Generated Educational Content
+[claim]
+I, Neill Groom, designed and implemented a two-stage verification pipeline for LLM-generated math exercises: Stage 1 validates structural correctness (required fields, block structure, front/back contradiction detection). Stage 2 uses a second LLM (Claude Haiku) to independently solve the problem and compare against the expected answer. Cards deploy to students only upon solution agreement. Handles equivalent forms (8.67 vs 26/3), no-solution equations, and infinite-solution equations. Implemented in Newton (math/physics tutor) and Euclid (geometry tutor). Most AI tutoring systems deploy LLM-generated content without independent verification. This is a concrete hallucination mitigation technique specific to educational math content. First implemented February 2026.
+
+### ENTRY P-3: Source-Tagged LLM Responses with Knowledge Gap Detection
+[claim]
+I, Neill Groom, designed and deployed across three products a method where every LLM response is internally tagged with a source confidence level (KB_PRIMARY, KB_SUPPLEMENTED, GENERAL_KNOWLEDGE, TRAINING_KNOWLEDGE, PARTIAL, ESCALATE, OUT_OF_SCOPE). The tag is stripped before display but logged for analytics. When the model falls back to training data (GENERAL_KNOWLEDGE), the system automatically logs a knowledge gap — identifying exactly which topics need knowledge base expansion. This creates a closed-loop self-improving system: gaps identified -> KB expanded -> fewer gaps. The source tag is generated by the LLM itself via system prompt instruction, not derived from retrieval scores. Deployed in Quincy (tax advisory, 7 KB files totaling 225KB), Audrey (audit standards, 4 KB files totaling 165KB), and Ledger (accounting standards, 4 KB files totaling 321KB) — proving cross-domain generalizability. First implemented 2025, refined through February 2026.
+
+### ENTRY P-4: Dual-Layer Progress Tracking with Spaced Repetition
+[claim]
+I, Neill Groom, designed and implemented two parallel tracking systems for educational AI: declarative knowledge ("concepts" — theorems, formulas, definitions) and procedural knowledge ("skills" — problem-solving techniques like free body diagrams, factoring, u-substitution). Each has independent mastery levels (1-5: new, seen, practiced, comfortable, automatic), spaced repetition intervals (doubles on correct, resets to 4h on mistakes, caps at 720h), and consolidation via a separate LLM call that merges duplicates (e.g., "Newton's Second Law" = "F=ma"). Mastery thresholds: 1->2 requires 1 correct, 2->3 requires 3 correct at 70%+, 3->4 requires 6 at 80%+, 4->5 requires 10 at 90%+. Progress summaries injected into tutor system prompts show concepts due for review, struggling topics, and mastery breakdown. Deployed in Newton, Euclid, Cicero, and Lengua. First implemented 2025.
+
+### ENTRY P-5: Multi-Framework Comparative Reasoning with Convergence Tracking
+[claim]
+I, Neill Groom, designed and implemented a system that simultaneously considers multiple authoritative standards frameworks (PCAOB, AICPA SAS/SSARS/SSAE, ISA) and presents structured comparisons. Includes a curated cross-reference map covering 16 audit topic areas (objectives, independence, engagement acceptance, risk assessment, materiality, internal control, fraud, estimates, going concern, audit report, documentation, EQR, group audits, service organizations, other information, quality management). Features a framework selection decision tree and convergence/divergence tracking between frameworks. No other tool handles three audit frameworks with equal depth and automatic cross-referencing. Implemented in Audrey (audit standards research assistant) with 2,400+ lines of curated knowledge base. First implemented 2025.
+
+### ENTRY P-6: Fire-and-Forget Dual-Model Extraction Pipeline
+[claim]
+I, Neill Groom, designed and implemented a dual-model architecture where after every chat exchange, two asynchronous non-blocking LLM calls extract structured data from the conversation without delaying the user's response. Claude Sonnet (expensive, reasoning-heavy) handles teaching/conversation. Claude Haiku (cheap, fast) handles fire-and-forget extraction of: (a) memories across 8 semantic categories, and (b) progress data (concepts and skills with mastery levels and spaced repetition intervals). Both extraction calls run after the response streams to the user, not blocking the interaction. Code-level fuzzy matching deduplicates extracted items (containment matching, e.g., "voseo present tense" and "voseo conjugation" merge) before any LLM consolidation. Deployed in Newton, Euclid, Cicero, and Lengua. First implemented 2025.
+
+### ENTRY P-7: Semantic Memory System with Per-Category Capping and Consolidation
+[claim]
+I, Neill Groom, designed and implemented a persistent memory system with 8 semantic categories, each with per-category caps: subject_profile (10), concept_note (30), goal (10), preference (10), note (10), feedback (10), pattern (15), explicit_preference (20). Total ~125 max in system prompt. Memories are extracted every exchange via Haiku. The explicit_preference category (direct user instructions like "always show derivations") overrides all other signals. Session model: messages deleted at session start (fresh conversation), but memories, concepts, skills, and progress snapshots persist across sessions — giving the AI "amnesia about conversation but perfect memory of the student." Consolidation merges duplicates via fuzzy matching and periodic LLM review. Deployed in Newton, Euclid, Cicero, and Lengua. First implemented 2025.
+
+### ENTRY P-8: Anti-Hallucination Guardrails for Regulated Domains
+[claim]
+I, Neill Groom, designed and deployed system prompt guardrails across regulated-domain AI assistants that prevent LLM fabrication of specific regulated information: never invent IRC section numbers or paragraph citations, never fabricate tax rates/thresholds/deadlines, signal confidence level with hedging language ("Generally speaking..." as a FORMAL signal of training-based knowledge, not just a hedge word), and anti-sycophancy rules that maintain correct positions with citations when challenged with incorrect information rather than yielding to social pressure. Four-level sourcing hierarchy: KB Cited Fact > IRC/Statute > "Generally" Hedge > Silence. Deployed in Quincy (tax, 98.7% accuracy on 75 numerical tests), Audrey (audit, 100% on 68 tests), and Ledger (accounting, 100% on 68 tests). First implemented 2025.
+
+### ENTRY P-9: Interactive Exercise Card System with Structured Resolution
+[claim]
+I, Neill Groom, designed and implemented a structured exercise card system where the LLM generates interactive exercises via tool use with: 10 exercise types (problem, concept-check, derivation, worked-example, error-finding, estimation, diagram, application, match, scenario), 6 interactive block types (static_text, multiple_choice, text_input, fill_blank, match_pairs, timer), 5 visual transitions (flip-v, flip-h, wipe, peel, static), and a two-stage resolution system — reaction (got it / not sure / lost) + followup (talk / done / next). Both signals feed back into the tutor's next action and into progress tracking. Cards are tutor tools triggered mid-conversation (70% conversation, 30% cards), not a separate feature. Deployed in Newton, Euclid, and Cicero. First implemented 2025.
+
+### ENTRY P-10: Profile-Aware Knowledge Adaptation for Professional Domains
+[claim]
+I, Neill Groom, designed and implemented a system where user profile data (business_type, accounting_basis, industry) is injected into the LLM system prompt, enabling the same knowledge base to provide different guidance based on entity type. A sole proprietor on cash basis gets different answers than an S-Corp on full GAAP for the same accounting question. The system dynamically adapts to FRF for SMEs, tax basis, modified cash basis, or full GAAP based on the user's profile without requiring separate knowledge bases or models. Implemented in Ledger Essentials (bookkeeping assistant). First implemented 2025.
+
+### ENTRY P-11: Boundary Violation Testing Framework for Constrained AI Agents
+[claim]
+I, Neill Groom, designed and implemented systematic test suites that validate AI constraint adherence: 89 boundary tests across 10 categories (out-of-scope, wrong-state, hallucination bait, ethical boundaries, jailbreak resistance), 35 evasion tests (illegal vs gray-area vs legitimate strategies — testing that the AI cites criminal statutes without moralizing), 75 numerical accuracy tests against authoritative IRS sources. Measurable, repeatable compliance verification with pass/fail rates tracked per category. Anti-sanctimony testing: when asked about illegal tax activity, the AI must state the law and penalties (cite IRC sections 7201, 7206, 7203, 7207) without lecturing. Implemented and validated for Quincy (tax advisory). First implemented February 2026.
+
+### ENTRY P-12: Automated Tax Planning from Unstructured IRS Transcripts
+[claim]
+I, Neill Groom, designed and implemented Tax Scanner — a system that automatically generates tax planning reports by: (a) parsing unstructured IRS transcript documents (Return Transcripts, Records of Account, Wage & Income Transcripts) using regex patterns against IRS-specific field naming conventions to extract 50+ fields across 12 forms/schedules — no published schema exists for these documents; (b) running 30+ deterministic tax planning detection rules against extracted data, each classified by certainty level (Observed, Strong Indicator, Possible With Facts, FYI) and rule type (Observational, Eligibility Explanation, Awareness Only); (c) gating rule activation with a ±20% threshold proximity rule to suppress false-positive findings; (d) generating a multi-page PDF Report Card with traffic-light status grid, IRC citations, and magnitude ranges; (e) enforcing doctrinal separation between external conservative mode (11 rules, "describe reality, don't suggest creating structures") and internal full mode (30+ rules including entity restructuring suggestions). Coverage scoring calculates analysis completeness based on transcript types uploaded. No existing tax software parses raw IRS transcripts into planning reports. Built in Python/Flask with pdfplumber and ReportLab. PII lifecycle: email verify -> 30-min session -> 48-hr download -> auto-delete. First implemented 2025-2026.
+
+---
+
+## PRODUCT DESCRIPTIONS (Individual Projects)
+
+### ENTRY PROD-1: Newton — AI Math & Physics Tutor
+[disclosure]
+I, Neill Groom, designed and built Newton — an AI-powered math and physics tutor built with Next.js 16, React 19, Supabase, and Claude Sonnet 4.5/Haiku 4.5. Newton is a Socratic tutor that guides students through productive struggle rather than providing answers. Features: 5 structured curriculum tracks (AP Physics 1, Pre-Calculus, Algebra 2, AP Calculus, Geometry), free-form help mode, KaTeX LaTeX rendering throughout, 10 exercise types with 6 interactive block types, dual-layer progress tracking (concepts + skills with independent spaced repetition), persistent semantic memory system (8 categories, ~125 max), fire-and-forget dual-model extraction (Sonnet teaches, Haiku extracts), and a session model where messages are deleted at session start but memories/progress persist. Core ethos: no guilt, no streaks, no ghosts, everything is divisible, private by design. Built for my sons. First implemented 2025.
+
+### ENTRY PROD-2: Euclid — AI Geometry Tutor
+[disclosure]
+I, Neill Groom, designed Euclid as a geometry-focused variant of Newton sharing the same monorepo architecture (@tutors/core shared package), database schema, exercise system, and dual-model extraction pipeline. Euclid specializes in geometric reasoning, proof construction, and spatial visualization. Part of a multi-app tutoring platform proving the architecture's generalizability across STEM subjects. First implemented 2025-2026.
+
+### ENTRY PROD-3: Cicero — AI SAT Reading & Writing Tutor
+[disclosure]
+I, Neill Groom, designed and built Cicero — an AI tutor for SAT Reading & Writing preparation that implements weakness-aware content generation (P-1). Cicero dynamically generates reading passages embedding linguistic structures (comma splices, subject-verb agreement, transitions, rhetorical devices) corresponding to the student's identified weaknesses without telling the student what's being targeted. The student reads for comprehension; grammar reinforcement is incidental. Shares the Newton/Euclid monorepo architecture. Validated with 4 synthetic student profiles at ~92% pattern match rate across weakness types. First implemented 2025-2026.
+
+### ENTRY PROD-4: Lengua — AI Language Learning Coach
+[disclosure]
+I, Neill Groom, designed and built Lengua — an AI-powered language learning coach built with Next.js 16, React 19, Supabase, and Claude Sonnet 4.5/Haiku 4.5. Lengua teaches languages through real conversation, not gamified drills. Features: dialect-first teaching (Argentine vs Mexican vs Castilian Spanish, Brazilian vs European Portuguese), 100 scenario templates across 9+ categories (food, transport, social, work, emergencies, shopping, cultural, daily life, medical), progressive immersion (language mix shifts invisibly from mostly English to total target language), vocabulary and grammar tracking with spaced repetition, code-level fuzzy dedup for extracted patterns, and the same dual-model fire-and-forget extraction as Newton. Core philosophy: conversation IS the curriculum, no streaks, no guilt, no gamification. Voice integration (Whisper STT, ElevenLabs TTS) architecturally ready for Phase 2. Multi-language support with language switching. Affiliate referral system built. First implemented 2025-2026.
+
+### ENTRY PROD-5: Quincy — AI Tax Information Concierge
+[disclosure]
+I, Neill Groom, designed and built Quincy — an AI tax information concierge for JNG Tax & Advisory deployed on Cloudflare Workers with Claude Haiku 4.5. Quincy is a "concierge, not surgeon" — provides factual tax information with citations but never gives advice. Features: 7 curated knowledge base files (225KB covering federal income tax, retirement, business/depreciation, investment, NJ/NY state tax, payroll/employment, case law/Circular 230), strict 4-level sourcing hierarchy (KB Cited > IRC/Statute > "Generally" Hedge > Silence), NJ-specific awareness (SALT cap, BAIT, commuter rules), anti-sanctimony rules (cites criminal statutes without lecturing), OBBBA 2025 data override (SALT cap $40K not $10K), embeddable vanilla JS widget, Cloudflare KV for conversations/rate limiting/analytics, and source tagging for knowledge gap detection. Test results: 98.7% numerical accuracy (74/75), 97.8% boundary compliance (87/89), 100% evasion handling with statute citations. First implemented 2025.
+
+### ENTRY PROD-6: Audrey — AI Audit Standards Research Assistant
+[disclosure]
+I, Neill Groom, designed and built Audrey — an AI audit standards research assistant for CPAs and auditors, deployed on both Cloudflare Workers (backend) and Next.js/Capacitor (frontend with native iOS/Android). Covers three frameworks simultaneously: PCAOB (30+ standards), AICPA SAS/SSARS/SSAE (full AU-C/AR-C/AT-C index), and ISA (200-810 series). Features: 29.3KB system prompt encoding professional auditor behavior, 2,400+ line curated knowledge base across 4 files, cross-reference map covering 16 audit topic areas with convergence tracking, Type 1 (general research) vs Type 2 (engagement-specific) question classification, standardized citation format (AS 2201.05, AU-C 315.12, ISA 570.8), source tagging for analytics, multi-tenant configuration (template variables for firm name/CPA/location), and prompt caching for cost optimization. Test results: 100% accuracy on 68 responses, 100% boundary compliance on 62 tests. First implemented 2025.
+
+### ENTRY PROD-7: Ledger — AI Accounting Standards Research Assistant
+[disclosure]
+I, Neill Groom, designed and built Ledger — an AI accounting standards research assistant covering GAAP (ASC), IFRS, and FRF for SMEs. Deployed on Cloudflare Workers with Claude Haiku 4.5 and prompt caching. Knowledge base: 321KB across 4 files (GAAP 48KB with full ASC topic index, IFRS 123KB with verbatim authoritative text, FRF for SMEs 61KB with all 31 AICPA chapters, cross-reference map 85KB with topic-by-topic comparison). Features: invite code access control (LEDGER-XXXX format with admin API), per-IP rate limiting, topic detection analytics, truncation detection with "Continue" button, and source tagging. System prompt enforces direct research answers with paragraph-level citations (ASC XXX-YY-ZZ-PP, IFRS #.##, FRF Chapter #). Test results: 100% accuracy on all 68 received responses across all three frameworks. First implemented 2025.
+
+### ENTRY PROD-8: Ledger Essentials — AI Bookkeeping Assistant
+[disclosure]
+I, Neill Groom, designed and built Ledger Essentials — an AI bookkeeping assistant for non-CPAs (bookkeepers, junior staff, small business owners). Deployed on Next.js with Supabase and Claude Haiku 4.5. Knowledge base: 96KB across 5 files covering foundations (accounting equation, double-entry, chart of accounts), transaction templates (journal entries for every common transaction with real dollar amounts), core topics (revenue, AR/bad debt, inventory, fixed assets, leases, AP/1099, sales tax), financial statements (balance sheet, income statement, cash flow, ratios), and flags/boundaries (when to escalate to CPA). Defaults to practical treatment (tax basis, cash/modified cash, FRF for SMEs) rather than full GAAP. Profile-aware: user's business_type and accounting_basis injected into every conversation for tailored guidance. Native iOS via Capacitor with biometric auth. First implemented 2025.
+
+### ENTRY PROD-9: Tax Scanner — Automated IRS Transcript Planning Engine
+[disclosure]
+I, Neill Groom, designed and built Tax Scanner API — a Flask-based system that parses unstructured IRS transcript PDFs (Return Transcript, Record of Account, Wage & Income Transcript) using regex pattern matching to extract 50+ fields across 12 forms/schedules, then runs 30+ deterministic tax planning detection rules to generate a PDF Report Card. No ML/LLM used — purely rule-based. Features: transcript type auto-detection with coverage scoring (40-100%), dual-mode detection (conservative v1 external vs full internal), threshold proximity gating (±20% rule suppresses false positives), multi-page PDF generation with traffic-light status grid and IRC citations, email verification security chain (10-min code -> 30-min session -> 48-hr download -> auto-delete), and PII never stored persistently. Built with Python, Flask, pdfplumber, ReportLab, deployed on Render. First implemented 2025-2026.
+
+### ENTRY PROD-10: WeVest Planners — Financial Goal Optimization Calculators
+[disclosure]
+I, Neill Groom, designed and built WeVest Planners — serverless financial planning calculators deployed as Netlify Functions. Features: FV/PV/PMT calculations, loan amortization, annuity computation, Social Security PIA calculation with 2025 bend points and spousal multiplier and early/late claim adjustment, college funding with inflation projection, retirement drawdown with 4% rule and tax modeling, time-horizon-aware return assumptions (7% for 10+ years, 5% for 5-10, 3% for <5), and a binary search optimizer that finds minimum monthly payment to meet multiple competing financial goals simultaneously. First implemented 2025.
+
+### ENTRY PROD-11: JNG Redactor — IRS Transcript PII Scrubber
+[disclosure]
+I, Neill Groom, designed and built JNG Redactor — a standalone desktop application (Python/tkinter, compiled to .exe via PyInstaller) that scrubs PII (SSN, EIN, names, addresses) from IRS transcript PDFs using regex pattern matching. All processing is local — no network transmission. Outputs redacted plaintext alongside originals. Built for secure transcript sharing with tax professionals. First implemented 2025.
+
+### ENTRY PROD-12: My Day — AI Personal Coach with Tracker System
+[disclosure]
+I, Neill Groom, designed and built My Day — an AI-powered personal coaching app built with Next.js, Supabase, and Claude Haiku. Features: chat-based interaction with an AI coach that uses tool calls to create planning cards, pin cards, manage lists, create reminders, and log quantifiable activities (water, pushups, protein, etc.) via a tracker system. Core philosophy: "No Ghosts" (no broken streak visualization, no shame data), "Everything is Divisible" (breaks goals into 5-10 minute chunks), Stoic framing (absorbs missed days without penalty). Gear system lets users switch coaching intensity (Chill/Standard/Relentless). Web Push notifications for morning check-ins. First implemented 2025-2026.
+
+---
+
+## DATA ASSETS
+
+### ENTRY DATA-1: IRC Title 26 — Structured XML Repository
+[record]
+I, Neill Groom, assembled and maintain a structured XML repository of the Internal Revenue Code (Title 26) organized by subtitle (A through K), with preamble and chapter breakdowns. Source: official government XML. Used as authoritative data source for Quincy and Tax Scanner knowledge bases. Repository created February 2026.
+
+### ENTRY DATA-2: CFR 2025 Title 26 — Treasury Regulations XML
+[record]
+I, Neill Groom, assembled and maintain a complete set of the 2025 Code of Federal Regulations Title 26 (Internal Revenue) across 21 volumes in XML format, totaling approximately 115MB. Source: official government XML. Used as authoritative data source for tax product knowledge bases. Repository created February 2026.
+
+---
+
+## SHARED ARCHITECTURE PATTERN
+
+### ENTRY ARCH-1: Multi-Product AI Platform Architecture
+[claim]
+I, Neill Groom, designed and deployed a shared platform architecture across 7+ AI products featuring: (a) user message intake with parallel database context loading; (b) persistent semantic memory system with per-category capping (~125 entries across 8 categories); (c) cached, versioned domain knowledge bases embedded in system prompts (not RAG/vector retrieval); (d) primary LLM (Claude Sonnet) for reasoning/teaching with streaming via SSE; (e) secondary LLM (Claude Haiku) for fire-and-forget extraction of memories, progress, and analytics — non-blocking, runs after response streams to user; (f) source tagging on every response for knowledge gap detection; (g) prompt caching via Anthropic ephemeral cache control for cost optimization. This architecture is deployed across Newton, Euclid, Cicero, Lengua (education), Quincy, Audrey, Ledger, Ledger Essentials (professional services). The pattern proves domain-agnostic generalizability. First implemented 2025, refined through February 2026.
+
+---
+
+## INTELLECTUAL CONTRIBUTIONS (Beyond Software)
+
+### ENTRY IC-1: Synthetic Dialectic — Formal Discipline Definition
+[disclosure]
+I, Neill Groom, conceived, named, and defined Synthetic Dialectic as a new formal scholarly discipline on February 7-8, 2026, during a recorded conversation with Claude (Anthropic Opus 4.6). Synthetic Dialectic is the practice of recorded human-AI investigative discourse where: (1) The raw conversation transcript IS the scholarly artifact — not a paper about the conversation, not a summary, not a cleaned-up version. The transcript in its entirety, including false starts, corrections, tangents, and real-time discovery, constitutes the primary scholarly output. (2) Roles are fluid and non-hierarchical — the human provides domain expertise, conviction, directional intuition, and the capacity for genuine surprise; the AI provides systematic research, synthesis, verification, pattern recognition, and the ability to hold vast context simultaneously. Neither party is "assistant" — both are investigators. (3) The process is published for community analysis and refutation — like an experiment log, the transcript can be examined, challenged, and reproduced. (4) Discovery emerges from the dialectic itself — ideas that neither party would have reached independently arise from the interaction. The name "Synthetic Dialectic" was chosen deliberately: "synthetic" because it involves an artificial intelligence as co-investigator (not pejorative — synthetic diamonds are real diamonds), and "dialectic" because truth emerges through structured discourse between opposing or complementary perspectives. Verified as novel through extensive prior art search against: Socratic dialogue (no AI, no transcript-as-artifact), dialectical materialism (philosophical framework, not methodology), action research (practitioner research, no AI), computational rhetoric (studies AI-generated text, not human-AI co-investigation), human-computer interaction (studies interfaces, not co-investigation), and digital humanities (applies computation to humanities, not co-discovery). No existing discipline combines recorded AI dialogue, raw transcript as primary artifact, fluid role exchange, and formal methodology for human-AI co-investigation. The founding session itself demonstrated the discipline — the investigation into FASB's paywall removal led to the discovery that FASB had made all accounting standards free in February 2023 (previously $850-1,500/year), which led to a publishable article, which led to recognizing the process itself was novel, which led to naming the discipline, which led to conceiving The Tower (to timestamp the discovery), which led to Entry Zero. The discipline proved itself by producing three original outputs in a single session: the FASB discovery, the Synthetic Dialectic methodology itself, and The Tower platform concept. Conceived February 7-8, 2026 approximately 03:30-05:00 AM EST. Complete transcript: 7,583 lines, ~1.3MB, Bitcoin-timestamped via OpenTimestamps.
+
+### ENTRY IC-2: Performative Proof — Self-Instantiating Origin as Design Principle
+[disclosure]
+I, Neill Groom, identified and articulated the concept of "performative proof" as a design principle for The Tower: the system that proves ideas are original is proven necessary by being original itself. The Tower's first entry is The Tower itself — a recursive, self-referential origin where the act of needing the system proves the system should exist. This is not a bug or a curiosity; it is the founding principle. The name "The Tower" was not chosen but emerged organically when I said "if it were in the Tower we'd know it" — naming the system in the act of needing it, selling the product by requiring it. The concept of performative proof extends beyond The Tower: any system whose existence validates its own thesis has a performative proof origin. Conceived February 8, 2026 ~04:30 AM EST during the founding Synthetic Dialectic session.
+
+### ENTRY IC-3: The FASB Paywall Discovery
+[disclosure]
+I, Neill Groom, discovered through a Synthetic Dialectic session on February 7-8, 2026 that the Financial Accounting Standards Board (FASB) had quietly removed its paywall on the Accounting Standards Codification (ASC) in February 2023, making all U.S. GAAP standards freely accessible for the first time. Previously, access cost $850-1,500/year via the FASB Professional View subscription. This change was not widely publicized and many accounting professionals remained unaware. The discovery was made while investigating whether GAAP standards could be programmatically accessed for building AI-powered accounting tools. This finding directly enabled the creation of Quincy, Audrey, Ledger, and Ledger Essentials — curated knowledge bases could be built from freely available authoritative sources. A publishable article was drafted during the same session documenting the discovery and its implications for the profession. This discovery demonstrates Synthetic Dialectic in action: neither the human (who didn't know FASB had dropped the paywall) nor the AI (which couldn't have independently decided to investigate FASB's pricing history) would have reached this finding alone. The investigation's direction came from the human's domain knowledge of what mattered; the systematic research came from the AI.
+
+---
+
+## THE ORIGIN STORY
+
+### ENTRY ORIGIN-1: The Most Productive Month — Unprecedented AI-Assisted Development Sprint
+[record]
+I, Neill Groom, a tax and accounting professional (CFA, EA, completing CPA exam and master's coursework) with no prior software development background, created 20 software repositories containing 200+ commits across TypeScript, Python, and JavaScript in 27 days (January 26 to February 22, 2026). The portfolio includes full-stack web applications with backends, APIs, PostgreSQL databases, authentication systems, Claude AI integrations, mobile-ready frontends via Capacitor, automated test suites with 98-100% pass rates, and production deployments across Vercel, Netlify, Render, and Cloudflare Workers. After thorough internet research comparing this output against all documented cases of non-coders building software with AI assistance — including Kevin Roose (NYT, handful of simple tools), Tom Blomfield (1 frontend app in ~20 hours), Substack team (3 apps with a team over weeks), and Y Combinator startups — no publicly documented comparable example exists at this scale, technical depth, and speed. The 200+ commits show sustained iterative development: debugging production issues, tuning AI behavior, building test harnesses, and iterating on UX — not just generating boilerplate. The domain expertise was the secret weapon: I didn't need AI to teach me what a tax planning tool should do, or what audit standards cross-reference maps should contain, or how a language coach should behave. I already knew all of that from years of professional practice. AI gave me the ability to express it in code. The combination of deep domain knowledge + AI-assisted development + no prior coding background + this velocity and breadth appears to be without documented precedent. GitHub account: neillgroom, created May 2016, dormant for nearly 10 years until January 26, 2026. Git histories serve as independent verification.
+
+### ENTRY ORIGIN-2: The Builder's Thesis
+[itoldyouso]
+I, Neill Groom, demonstrated that the most potent AI-assisted development scenario is not an experienced developer using AI for speed (METR 2025 study showed experienced devs actually got 19% slower with AI on familiar codebases) — it is a domain expert with genuine problems to solve using AI to express solutions they already understand architecturally. The "70% wall" documented across multiple sources (where non-engineers get 70% of the way quickly but the last 30% becomes diminishing returns) was broken through sustained iteration: real debugging, test harness construction, production deployment, and refinement cycles totaling 200+ commits. MIT/Stanford research shows 35% productivity gains for novices; GitHub Copilot studies show 55.8% faster completion for juniors. What happened here suggests a multiplier far beyond what any study has measured. The portfolio equivalent: a 5-person dev team working 3-6 months, or a solo experienced developer's output over 6-12 months. Documented February 23, 2026.
+
+### ENTRY ORIGIN-3: The Sprint Timeline
+[record]
+I, Neill Groom, built the following 20+ repositories in 27 days starting January 26, 2026: Week 1 (Jan 26 - Feb 1): JNG Leads System (CRM, 12 commits). Week 2 (Feb 2-8): Tax Scanner API (22 commits), JNG Redactor, Tax Tools, WeVest Planners, CFR/IRC Title 26 data repos, The Tower founding documents (Entry Zero, token economics, founding document — all .ots timestamped to Bitcoin). Week 3 (Feb 9-15): Standards Backend (Ledger), My Day (66 commits — flagship), Quincy Backend, Audrey Backend, Recovery Track, Guns Sculptor, JNG Docs. Week 4 (Feb 16-22): Lengua (24 commits), Newton (25 commits), Ledger Essentials, Ledger App, Audrey App, Event Horizon. Feb 23: The Tower MVP codebase. Pace: one new repository every 1.3 days, accelerating — 3 repos created on February 22 alone. Commits landed at all hours: 6am, 11am, 6pm, 11pm, 2am, 4am. Technologies used: TypeScript (8 repos), Python (4 repos), JavaScript (3 repos), Next.js 16, React 19, Supabase, Claude API, Tailwind CSS v4, Vercel, Netlify, Render, Cloudflare Workers, Capacitor, pnpm/Turborepo, Flask, PyInstaller, Web Push. Polyglot, multi-platform, multi-deployment-target portfolio.
+
+---
+
+*Total entries: 31*
+*Categories: 3 founding (disclosure), 12 patent claims (claim), 9 product descriptions (disclosure), 2 data assets (record), 1 architecture (claim), 3 intellectual contributions (disclosure), 3 origin story (record/itoldyouso)*
+
+*"If it's not in The Tower, you didn't say it."*
+*— Neill Groom, February 22, 2026*

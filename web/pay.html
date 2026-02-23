@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE TOWER — Buy Credits</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="tower-mark">
+            <span class="triangle">&#9650;</span>
+            <h1>THE TOWER</h1>
+            <p class="tagline">Load credits. Carve ideas.</p>
+        </div>
+
+        <nav class="nav">
+            <a href="/">Home</a>
+            <a href="verify.html">Verify</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="pay.html" class="active">Buy Credits</a>
+        </nav>
+
+        <h2 class="text-center mb-2">Choose Your Pack</h2>
+
+        <div class="card pack" data-pack="10" onclick="selectPack('10')">
+            <div class="flex flex-between flex-center">
+                <div>
+                    <div class="pack-price">$5</div>
+                    <div class="pack-detail">10 entries &middot; 50&cent; each</div>
+                </div>
+                <div class="text-dim">Starter</div>
+            </div>
+        </div>
+
+        <div class="card pack" data-pack="25" onclick="selectPack('25')">
+            <div class="flex flex-between flex-center">
+                <div>
+                    <div class="pack-price">$10</div>
+                    <div class="pack-detail">25 entries &middot; 40&cent; each</div>
+                </div>
+                <div class="text-gold">Best Value</div>
+            </div>
+        </div>
+
+        <div class="card pack" data-pack="100" onclick="selectPack('100')">
+            <div class="flex flex-between flex-center">
+                <div>
+                    <div class="pack-price">$35</div>
+                    <div class="pack-detail">100 entries &middot; 35&cent; each</div>
+                </div>
+                <div class="text-dim">Builder</div>
+            </div>
+        </div>
+
+        <div class="text-center mt-3">
+            <button class="btn" id="checkoutBtn" onclick="checkout()" disabled>Select a Pack</button>
+        </div>
+
+        <p class="text-center text-dim mt-2" style="font-size: 0.8rem;">
+            Apple Pay &middot; Google Pay &middot; Card<br>
+            Powered by Stripe
+        </p>
+
+        <div class="footer">
+            "If it's not in The Tower, you didn't say it."
+        </div>
+    </div>
+
+    <script>
+        let selectedPack = null;
+        const phoneHash = new URLSearchParams(window.location.search).get('u');
+
+        function selectPack(pack) {
+            selectedPack = pack;
+            document.querySelectorAll('.pack').forEach(el => el.classList.remove('selected'));
+            document.querySelector(`[data-pack="${pack}"]`).classList.add('selected');
+            document.getElementById('checkoutBtn').disabled = false;
+            document.getElementById('checkoutBtn').textContent = 'Continue to Payment';
+        }
+
+        async function checkout() {
+            if (!selectedPack || !phoneHash) return;
+
+            const btn = document.getElementById('checkoutBtn');
+            btn.disabled = true;
+            btn.textContent = 'Redirecting...';
+
+            try {
+                const res = await fetch('/api/checkout', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ phoneHash, pack: selectedPack })
+                });
+                const data = await res.json();
+                if (data.url) {
+                    window.location.href = data.url;
+                } else {
+                    btn.textContent = 'Error — try again';
+                    btn.disabled = false;
+                }
+            } catch {
+                btn.textContent = 'Error — try again';
+                btn.disabled = false;
+            }
+        }
+    </script>
+</body>
+</html>

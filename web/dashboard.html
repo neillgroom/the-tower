@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE TOWER — Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container-wide">
+        <div class="tower-mark">
+            <span class="triangle">&#9650;</span>
+            <h1>THE TOWER</h1>
+            <p class="tagline">Your permanent record.</p>
+        </div>
+
+        <nav class="nav">
+            <a href="/">Home</a>
+            <a href="verify.html">Verify</a>
+            <a href="dashboard.html" class="active">Dashboard</a>
+            <a href="pay.html">Buy Credits</a>
+        </nav>
+
+        <!-- Auth -->
+        <div id="authSection">
+            <div class="card">
+                <h3 class="mb-2">Access Your Entries</h3>
+                <label>Phone Hash</label>
+                <input type="text" id="phoneHashInput" placeholder="Enter your phone hash" class="mb-2">
+                <p class="text-dim mb-2" style="font-size: 0.8rem;">
+                    Your phone hash was sent to you via SMS when you first texted The Tower.
+                </p>
+                <button class="btn" onclick="loadEntries()">View Entries</button>
+            </div>
+        </div>
+
+        <!-- Dashboard -->
+        <div id="dashboardSection" style="display:none;">
+            <div class="flex flex-between flex-center mb-2">
+                <div>
+                    <h2 id="aliasDisplay">Your Entries</h2>
+                </div>
+                <div class="text-center">
+                    <div class="counter-number" style="font-size: 1.5rem;" id="creditCount">—</div>
+                    <div class="counter-label" style="font-size: 0.7rem;">credits</div>
+                </div>
+            </div>
+
+            <div class="flex gap-1 mb-2">
+                <a href="#" id="reloadLink" class="btn btn-outline btn-small">Reload Credits</a>
+            </div>
+
+            <div id="entriesList">
+                <div class="loading"><span class="spinner"></span> Loading entries...</div>
+            </div>
+        </div>
+
+        <div class="footer">
+            "If it's not in The Tower, you didn't say it."
+        </div>
+    </div>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const urlHash = params.get('u');
+
+        if (urlHash) {
+            document.getElementById('phoneHashInput').value = urlHash;
+            loadEntries();
+        }
+
+        async function loadEntries() {
+            const phoneHash = document.getElementById('phoneHashInput').value.trim();
+            if (!phoneHash) return;
+
+            document.getElementById('authSection').style.display = 'none';
+            document.getElementById('dashboardSection').style.display = 'block';
+            document.getElementById('reloadLink').href = `pay.html?u=${phoneHash}`;
+
+            try {
+                const res = await fetch(`/api/entries/${phoneHash}`);
+                if (!res.ok) throw new Error('Not found');
+                const data = await res.json();
+
+                document.getElementById('creditCount').textContent = data.credits;
+                if (data.alias) {
+                    document.getElementById('aliasDisplay').textContent = data.alias + "'s Entries";
+                }
+
+                const list = document.getElementById('entriesList');
+
+                if (data.entries.length === 0) {
+                    list.innerHTML = '<div class="card text-center text-dim">No entries yet. Text your first idea to The Tower.</div>';
+                    return;
+                }
+
+                list.innerHTML = data.entries.map(e => {
+                    const date = new Date(e.created_at).toLocaleString();
+                    const statusClass = e.btc_block ? 'status-anchored' : (e.status === 'carved' ? 'status-carved' : 'status-pending');
+                    const statusText = e.btc_block ? 'anchored' : e.status;
+
+                    return `
+                        <div class="card">
+                            <div class="flex flex-between flex-center mb-1">
+                                <span class="entry-id">Entry #${e.id}</span>
+                                <div class="flex gap-1 flex-center">
+                                    <span class="entry-category">${e.category}</span>
+                                    <span class="entry-status ${statusClass}">${statusText}</span>
+                                </div>
+                            </div>
+                            <div class="entry-time mb-1">${date}</div>
+                            <div class="entry-hash mb-1">TEXT: ${e.hash_text}</div>
+                            ${e.hash_bound ? `<div class="entry-hash mb-1">BOUND: ${e.hash_bound}</div>` : ''}
+                            ${e.btc_block ? `<div class="entry-hash text-gold">BTC: Block ${e.btc_block}</div>` : ''}
+                            ${e.status === 'carved' ? `<div class="mt-1"><a href="prove.html?entry=${e.id}&u=${phoneHash}" class="btn btn-outline btn-small">Pull Proof ($5)</a></div>` : ''}
+                        </div>
+                    `;
+                }).join('');
+            } catch {
+                document.getElementById('entriesList').innerHTML = '<div class="card text-center" style="color: var(--error);">User not found. Check your phone hash.</div>';
+            }
+        }
+    </script>
+</body>
+</html>

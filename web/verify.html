@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE TOWER — Verify</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="tower-mark">
+            <span class="triangle">&#9650;</span>
+            <h1>THE TOWER</h1>
+            <p class="tagline">Independent. Mathematical. Verifiable.</p>
+        </div>
+
+        <nav class="nav">
+            <a href="/">Home</a>
+            <a href="verify.html" class="active">Verify</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="pay.html">Buy Credits</a>
+        </nav>
+
+        <div class="card">
+            <h3 class="mb-2">Verify by Text</h3>
+            <p class="text-dim mb-2" style="font-size: 0.85rem;">Paste the original text. We'll hash it and check against all carved entries.</p>
+            <textarea id="verifyText" placeholder="Paste the original text here..."></textarea>
+            <button class="btn mt-2" onclick="verifyByText()">Verify Text</button>
+        </div>
+
+        <div class="card">
+            <h3 class="mb-2">Verify by Hash</h3>
+            <p class="text-dim mb-2" style="font-size: 0.85rem;">Paste a SHA-256 hash directly.</p>
+            <input type="text" id="verifyHash" placeholder="Enter SHA-256 hash (64 characters)">
+            <button class="btn mt-2" onclick="verifyByHash()">Verify Hash</button>
+        </div>
+
+        <div id="resultSection" style="display:none;" class="mt-3">
+            <div id="resultContent"></div>
+        </div>
+
+        <div class="card mt-3">
+            <h3 class="mb-1">How Verification Works</h3>
+            <p class="text-dim" style="font-size: 0.85rem;">
+                Verification is independent and mathematical. No trust required.
+            </p>
+            <div class="entry">
+                <p><span class="text-gold">1.</span> Your text is hashed with SHA-256 — a one-way function.</p>
+            </div>
+            <div class="entry">
+                <p><span class="text-gold">2.</span> The hash is checked against The Tower's database.</p>
+            </div>
+            <div class="entry">
+                <p><span class="text-gold">3.</span> If matched, the timestamp is verified against the Bitcoin blockchain.</p>
+            </div>
+            <div class="entry" style="border-bottom: none;">
+                <p><span class="text-gold">4.</span> Anyone can independently verify — no access to The Tower needed.</p>
+            </div>
+        </div>
+
+        <div class="footer">
+            "If it's not in The Tower, you didn't say it."
+        </div>
+    </div>
+
+    <script>
+        async function verifyByText() {
+            const text = document.getElementById('verifyText').value.trim();
+            if (!text) return;
+
+            showLoading();
+
+            try {
+                const res = await fetch('/api/verify/text', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ text })
+                });
+                const data = await res.json();
+                showResult(data, text);
+            } catch {
+                showError();
+            }
+        }
+
+        async function verifyByHash() {
+            const hash = document.getElementById('verifyHash').value.trim();
+            if (!hash) return;
+
+            showLoading();
+
+            try {
+                const res = await fetch(`/api/verify/text/${hash}`);
+                const data = await res.json();
+                if (!data.verified) {
+                    const res2 = await fetch(`/api/verify/bound/${hash}`);
+                    const data2 = await res2.json();
+                    showResult(data2, null);
+                } else {
+                    showResult(data, null);
+                }
+            } catch {
+                showError();
+            }
+        }
+
+        function showLoading() {
+            const section = document.getElementById('resultSection');
+            section.style.display = 'block';
+            document.getElementById('resultContent').innerHTML = '<div class="loading"><span class="spinner"></span> Verifying...</div>';
+        }
+
+        function showResult(data, originalText) {
+            const section = document.getElementById('resultSection');
+            section.style.display = 'block';
+
+            if (data.verified) {
+                const date = new Date(data.created_at).toLocaleString();
+                const anchorStatus = data.anchor.btc_block
+                    ? `<span class="status-anchored entry-status">Anchored — Block ${data.anchor.btc_block}</span>`
+                    : `<span class="status-carved entry-status">${data.anchor.status}</span>`;
+
+                document.getElementById('resultContent').innerHTML = `
+                    <div class="card verified">
+                        <h3 class="mb-1" style="color: var(--success);">&#10003; VERIFIED</h3>
+                        <div class="entry-id mb-1">Entry #${data.entry_id}</div>
+                        <div class="entry-time mb-1">${date}</div>
+                        <div class="mb-1">${anchorStatus}</div>
+                        <div class="entry-hash mb-1">TEXT HASH: ${data.hash_text}</div>
+                        ${data.hash_bound ? `<div class="entry-hash mb-1">BOUND HASH: ${data.hash_bound}</div>` : ''}
+                        ${data.anchor.merkle_root ? `<div class="entry-hash">MERKLE ROOT: ${data.anchor.merkle_root}</div>` : ''}
+                    </div>
+                `;
+            } else {
+                document.getElementById('resultContent').innerHTML = `
+                    <div class="card not-found">
+                        <h3 class="mb-1" style="color: var(--error);">NO MATCH</h3>
+                        <p class="text-dim">This text or hash was not found in The Tower.</p>
+                        ${originalText ? `<div class="entry-hash mt-1">Computed hash: ${computeDisplayHash(originalText)}</div>` : ''}
+                    </div>
+                `;
+            }
+        }
+
+        function showError() {
+            document.getElementById('resultContent').innerHTML = `
+                <div class="card not-found">
+                    <p style="color: var(--error);">Verification failed. Try again.</p>
+                </div>
+            `;
+        }
+
+        function computeDisplayHash(text) {
+            // Display-only — actual verification happens server-side
+            return '(computed server-side)';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+{
+  "name": "the-tower",
+  "version": "1.0.0",
+  "description": "The Tower — Text-message-based idea timestamping anchored to Bitcoin",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "nodemon server/index.js",
+    "migrate": "psql $DATABASE_URL -f migrations/001_initial.sql"
+  },
+  "keywords": ["timestamping", "bitcoin", "sha256", "merkle", "sms"],
+  "author": "Neill Groom",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1",
+    "helmet": "^8.1.0",
+    "pg": "^8.18.0",
+    "stripe": "^20.3.1",
+    "twilio": "^5.12.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}

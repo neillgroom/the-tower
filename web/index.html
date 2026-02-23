@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE TOWER — Carve Your Ideas in Time</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="tower-mark">
+            <span class="triangle">&#9650;</span>
+            <h1>THE TOWER</h1>
+            <p class="tagline">Free to log. 50&cent; to carve. $5 to prove.</p>
+        </div>
+
+        <div class="phone-section">
+            <p class="text-dim mb-1">Text your idea to</p>
+            <p class="phone-number">1-888-TOWER-IT</p>
+            <p class="text-dim mt-1" style="font-size: 0.8rem;">SMS &middot; Any phone &middot; No app needed</p>
+        </div>
+
+        <div class="card" style="text-align: center;">
+            <p>SHA-256 hashed. Timestamped. Batched into Merkle trees. Anchored to Bitcoin.</p>
+            <p class="text-dim mt-1">Mathematical proof that you said it first.</p>
+        </div>
+
+        <div class="counter">
+            <div class="counter-number" id="totalEntries">—</div>
+            <div class="counter-label">ideas carved</div>
+        </div>
+
+        <nav class="nav">
+            <a href="verify.html">Verify</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="pay.html">Buy Credits</a>
+        </nav>
+
+        <div class="card">
+            <h3 class="mb-1">How It Works</h3>
+            <div class="entry">
+                <p><span class="text-gold">1.</span> Text any idea, prediction, or claim to The Tower.</p>
+            </div>
+            <div class="entry">
+                <p><span class="text-gold">2.</span> It gets hashed and timestamped instantly (50&cent;).</p>
+            </div>
+            <div class="entry">
+                <p><span class="text-gold">3.</span> Every hour, entries are batched and anchored to Bitcoin.</p>
+            </div>
+            <div class="entry" style="border-bottom: none;">
+                <p><span class="text-gold">4.</span> Pull a verified proof receipt anytime ($5).</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3 class="mb-1">SMS Commands</h3>
+            <div class="entry">
+                <p><span class="mono text-gold">BALANCE</span> &mdash; check your credits</p>
+            </div>
+            <div class="entry">
+                <p><span class="mono text-gold">ENTRIES</span> &mdash; see your entry count</p>
+            </div>
+            <div class="entry">
+                <p><span class="mono text-gold">PROVE [id]</span> &mdash; pull a proof receipt</p>
+            </div>
+            <div class="entry" style="border-bottom: none;">
+                <p><span class="mono text-gold">VERIFY [hash]</span> &mdash; verify any entry</p>
+            </div>
+        </div>
+
+        <div class="footer">
+            "If it's not in The Tower, you didn't say it."
+        </div>
+    </div>
+
+    <script>
+        fetch('/api/stats')
+            .then(r => r.json())
+            .then(data => {
+                document.getElementById('totalEntries').textContent = data.total_entries.toLocaleString();
+            })
+            .catch(() => {
+                document.getElementById('totalEntries').textContent = '0';
+            });
+    </script>
+</body>
+</html>

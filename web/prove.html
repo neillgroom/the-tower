@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE TOWER — Proof Receipt</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="tower-mark">
+            <span class="triangle">&#9650;</span>
+            <h1>THE TOWER</h1>
+            <p class="tagline">Independently verifiable proof.</p>
+        </div>
+
+        <nav class="nav">
+            <a href="/">Home</a>
+            <a href="verify.html">Verify</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="pay.html">Buy Credits</a>
+        </nav>
+
+        <div id="paySection" style="display:none;">
+            <div class="card text-center">
+                <h3 class="mb-2">Pull Proof Receipt</h3>
+                <p class="mb-2">Entry #<span id="entryIdDisplay"></span></p>
+                <p class="text-dim mb-2">Generate a cryptographically verifiable proof receipt for this entry.</p>
+                <div class="pack-price mb-1">$5</div>
+                <button class="btn" onclick="buyProof()">Purchase Proof</button>
+            </div>
+        </div>
+
+        <div id="proofSection" style="display:none;">
+            <div class="card">
+                <div class="flex flex-between flex-center mb-2">
+                    <h3>Proof Receipt</h3>
+                    <div class="flex gap-1">
+                        <button class="btn btn-outline btn-small" onclick="copyProof()">Copy</button>
+                        <button class="btn btn-outline btn-small" onclick="downloadProof()">Download</button>
+                    </div>
+                </div>
+                <div class="receipt" id="receiptDisplay"></div>
+            </div>
+        </div>
+
+        <div id="loadingSection" style="display:none;">
+            <div class="loading"><span class="spinner"></span> Generating proof receipt...</div>
+        </div>
+
+        <div class="footer">
+            "If it's not in The Tower, you didn't say it."
+        </div>
+    </div>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const entryId = params.get('entry');
+        const phoneHash = params.get('u');
+        const paid = params.get('paid');
+
+        if (entryId) {
+            document.getElementById('entryIdDisplay').textContent = entryId;
+        }
+
+        if (paid === 'true' && entryId && phoneHash) {
+            loadProof();
+        } else if (entryId) {
+            document.getElementById('paySection').style.display = 'block';
+        }
+
+        async function buyProof() {
+            try {
+                const res = await fetch('/api/proof-checkout', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ phoneHash, entryId })
+                });
+                const data = await res.json();
+                if (data.url) window.location.href = data.url;
+            } catch {
+                alert('Error starting checkout. Try again.');
+            }
+        }
+
+        async function loadProof() {
+            document.getElementById('paySection').style.display = 'none';
+            document.getElementById('loadingSection').style.display = 'block';
+
+            try {
+                const res = await fetch(`/api/proof/${entryId}?phoneHash=${phoneHash}`);
+                const proof = await res.json();
+
+                const text = formatReceipt(proof);
+                document.getElementById('receiptDisplay').textContent = text;
+                document.getElementById('loadingSection').style.display = 'none';
+                document.getElementById('proofSection').style.display = 'block';
+            } catch {
+                document.getElementById('loadingSection').innerHTML = '<p style="color: var(--error);">Failed to load proof. Ensure payment completed.</p>';
+            }
+        }
+
+        function formatReceipt(r) {
+            return [
+                '════════════════════════════════════════',
+                '  ▲ THE TOWER — PROOF RECEIPT',
+                '════════════════════════════════════════',
+                '',
+                `Entry #${r.entry.id}`,
+                `Created: ${r.entry.created_at}`,
+                `Category: ${r.entry.category}`,
+                `Source: ${r.entry.source}`,
+                '',
+                '────────────────────────────────────────',
+                'TEXT:',
+                r.entry.text,
+                '────────────────────────────────────────',
+                '',
+                'IDENTITY:',
+                `  Alias: ${r.identity.alias || 'N/A'}`,
+                `  Phone Hash: ${r.identity.phone_hash}`,
+                '',
+                'HASHES:',
+                `  Text Hash:  ${r.hashes.hash_text}`,
+                `  Bound Hash: ${r.hashes.hash_bound}`,
+                '',
+                'MERKLE:',
+                `  Batch ID: ${r.merkle.batch_id || 'Pending'}`,
+                `  Root: ${r.merkle.merkle_root || 'Pending'}`,
+                '',
+                'BITCOIN:',
+                `  Status: ${r.bitcoin.status}`,
+                `  Block: ${r.bitcoin.btc_block || 'Pending'}`,
+                `  Anchored: ${r.bitcoin.anchored_at || 'Pending'}`,
+                '',
+                'VERIFICATION:',
+                ...r.verification.instructions.map(i => '  ' + i),
+                '',
+                `Receipt Hash: ${r.receipt_hash}`,
+                `Generated: ${r.generated_at}`,
+                '',
+                '════════════════════════════════════════',
+                '  "If it\'s not in The Tower, you didn\'t say it."',
+                '════════════════════════════════════════'
+            ].join('\n');
+        }
+
+        function copyProof() {
+            const text = document.getElementById('receiptDisplay').textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                const btn = event.target;
+                btn.textContent = 'Copied!';
+                setTimeout(() => btn.textContent = 'Copy', 2000);
+            });
+        }
+
+        function downloadProof() {
+            const text = document.getElementById('receiptDisplay').textContent;
+            const blob = new Blob([text], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `tower-proof-entry-${entryId}.txt`;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+    </script>
+</body>
+</html>
