@@ -1,7 +1,7 @@
 const stripe = require('stripe')(process.env.STRIPE_SECRET);
 const db = require('./db');
 
-const BASE_URL = process.env.BASE_URL || 'https://thetower.app';
+const BASE_URL = process.env.BASE_URL || 'https://thetower.one';
 
 const CREDIT_PACKS = {
     '10': { credits: 10, price: 500, label: '10 entries — $5 (50¢ each)' },

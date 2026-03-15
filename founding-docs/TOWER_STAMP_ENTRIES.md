@@ -181,8 +181,60 @@ I, Neill Groom, built the following 20+ repositories in 27 days starting January
 
 ---
 
-*Total entries: 31*
-*Categories: 3 founding (disclosure), 12 patent claims (claim), 9 product descriptions (disclosure), 2 data assets (record), 1 architecture (claim), 3 intellectual contributions (disclosure), 3 origin story (record/itoldyouso)*
+## TRUST ARCHITECTURE (March 2026)
+
+### ENTRY TRUST-1: Two-Stage Firewalled Data Architecture for Tax Document Processing
+[claim]
+I, Neill Groom, designed a two-stage firewalled architecture for processing sensitive tax documents (IRS transcripts) where: **Stage 1 (Client-Side Redactor)** runs entirely in the user's browser — PDF text extraction via pdf.js and regex-based PII stripping (SSN, EIN, names, addresses, dates of birth) ported from the JNG Redactor Python codebase — with visual confirmation showing the user exactly what was identified and removed before any data leaves the browser. **Stage 2 (Server-Side Scanner)** receives ONLY the redacted text, runs the Tax Scanner analysis pipeline (regex extraction + 3-tier AI validation), generates findings, and destroys input data after processing. The two stages are architecturally separated: Stage 1 has zero network calls and no access to Stage 2's API until the user explicitly confirms the redacted output. This creates a verifiable trust guarantee: personal identifying information never reaches the server. The architecture supports three access paths: (a) in-browser redaction as the default zero-friction path embedded in the Tax Scanner widget, (b) a Chrome Web Store extension providing the same redaction with Google's review process as implicit third-party validation, and (c) a standalone desktop application (Python/PyInstaller .exe) for users who refuse any web-based processing. This declaration of architectural intent is being timestamped in The Tower prior to implementation as proof that data handling commitments were made before the system was built — not after an incident or inquiry. The redactor source code will be published as open-source for independent verification. Designed March 14, 2026. Applies to Tax Scanner API (jng-tax-scanner) and the JNG Tax Product Suite (Quincy, Ledger Plugin, Tax Scanner) as a shared trust framework.
+
+### ENTRY TRUST-2: JNG Tax Product Suite — Unified Commercial Architecture
+[disclosure]
+I, Neill Groom, designed a unified commercial architecture for three AI-powered tax and accounting products sold as embeddable widgets for accounting firm websites: (1) **Quincy** — tax Q&A chatbot on Cloudflare Workers with Claude Haiku 4.5, 225KB curated knowledge base, source-tagged responses, knowledge gap detection, and conversion tracking (booking/phone clicks); (2) **Ledger Plugin** — bookkeeping assistant on Cloudflare Workers with 96KB knowledge base, firm-branded system prompts with template variables, and the same analytics pipeline; (3) **Tax Scanner** — IRS transcript analyzer on Flask/Render with 3-tier AI validation (regex → Haiku → Sonnet), PDF report generation, and per-scan billing. All three share a common commercial model: firms embed a widget on their website via a single script tag, visitors get free value (answers, analysis), firms pay per interaction and per conversion (booking click, phone click, contact form submission). Metered billing via Stripe. Multi-tenant configuration per firm (branding, booking URLs, credentials). Analytics include message logging, source tracking, topic detection, knowledge gap identification, and conversion attribution. The suite is preceded by a client-side PII redaction stage (TRUST-1) for any document upload path. Designed and documented March 14, 2026. Products first implemented 2025-2026 individually; unified as a suite March 2026.
+
+---
+
+### ENTRY TRUST-3: Sealed Entry Architecture — Dual-Key Encrypted Timestamping
+[claim]
+I, Neill Groom, designed a sealed entry system for The Tower where entries are encrypted client-side before transmission — the Tower stores ciphertext and a SHA-256 hash of the plaintext, anchors the hash to Bitcoin, but never sees the content. Revelation requires the owner's encryption key: decrypted plaintext is verified by anyone via SHA-256(plaintext) === anchored hash. Two-key model: Key 1 (Tower) proves WHEN, Key 2 (owner) proves WHAT. Supports three encryption tiers: (a) password-based AES-256-GCM with PBKDF2 key derivation (default), (b) asymmetric keypair for third-party encrypted submissions, (c) Shamir's Secret Sharing for M-of-N multi-party revelation (e.g., 3 of 5 keyholders required to unseal). The sealed entry model enables: predictions without influencing outcomes, whistleblower protection, trade secret priority without disclosure, legal pre-declarations, and partnership agreements with timestamped dispute resolution. Metaphor credit: "Two keys at the bank to a safety deposit box." Designed March 14, 2026.
+
+---
+
+## THE TOWER META
+
+### ENTRY META-1: The Tower Is a Legacy Project
+[itoldyouso]
+I, Neill Groom, noted at 10:47 PM on March 14, 2026, while discussing deploying The Tower, that it is itself a "legacy project" — in both senses of the word. Legacy as in: built weeks ago and already half-forgotten in the velocity of an unprecedented development sprint. And legacy as in: something you leave behind. The dual meaning was intentional, delivered as a joke during a conversation with Claude about why the Tower should be deployed ("if I don't use it, why should anyone else?"). Jokes, like ideas, deserve timestamps. The best ones are both things at once.
+
+### ENTRY TRUST-4: Tiered Security Model with Per-Entry User Choice
+[claim]
+I, Neill Groom, designed a tiered security model for The Tower where each entry's encryption level is chosen by the user at time of submission, with defaults determined by category. Four tiers: (1) **Open** — plaintext, public, searchable, full text visible (default for idea, claim, disclosure); (2) **Sealed** — AES-256-GCM encrypted client-side, owner reveals with their key when ready (default for prediction, itoldyouso); (3) **Vault** — Shamir's Secret Sharing with configurable M-of-N threshold, requires multiple keyholders to unseal (for high-stakes legal, partnerships, corporate declarations); (4) **Tomb** — time-locked encryption where the entry CANNOT be opened until a specified date, not even by the owner, enforced cryptographically (for dead man's switches, posthumous revelations, embargoed predictions, "open after" scenarios). Higher security tiers command higher per-entry pricing. All tiers receive the same SHA-256 hashing, Merkle batching, and Bitcoin blockchain anchoring. Designed March 14, 2026.
+
+### ENTRY TRUST-5: Public Inscriptions on Sealed Entries — The Vault Door Model
+[claim]
+I, Neill Groom, designed the "vault door inscription" system for The Tower: every sealed, vault, or tomb entry carries a public-facing, unencrypted, immutable inscription visible to all Tower users — while the entry contents remain locked. The inscription is the label on the vault door: "To Never Be Known," "If I disappear, open this," "Prediction: 2028 Election," "For my children, when they're ready." Inscriptions are timestamped with the same Bitcoin anchor as the contents, cannot be edited after sealing, and are searchable/browsable. This transforms The Tower from a cryptographic utility into a *place* — a browsable archive of human declarations where the sealed entries are as compelling as the open ones. The visual metaphor: a limitless dwarven tower with stone halls and impenetrable vault doors, each bearing an inscription. Open entries are readable rooms. Sealed entries glow behind locked doors. Tombs display countdown timers carved in stone. The 2D web version is a searchable directory of inscriptions filtered by category, date, and tier. The future VR version is a procedurally generated explorable tower environment (WebXR) where users physically walk through halls of timestamped vaults. The lore distinction: **Open entries are not vaults.** They have no door — they are plaques on the wall. Text visible, timestamp carved below. You walk past and read them. The physical hierarchy in the Tower: Open = plaque on the wall (no door, no lock, no mystery); Sealed = vault door with inscription (locked, owner has the key); Vault = heavy vault door with multiple keyholes (inscription visible, requires M-of-N keyholders); Tomb = vault door with countdown timer carved in stone (inscription visible, no keyhole at all until the date arrives). This lore is itself public — a plaque, not a vault. Conceived March 14, 2026 at approximately 10:55 PM EST during a conversation where Neill said: "Imagine you were in a WoW style dwarven tower, walking through limitless halls, with impenetrable vaults everywhere with labels on the doors" and then clarified: "The Lore for The Tower is all public. There is no door, just a plaque on the wall, timestamped."
+
+---
+
+### ENTRY META-2: "Imagine if Tesla Had The Tower"
+[record]
+I, Neill Groom, posed the question on March 14, 2026: "Imagine if Nikola Tesla had The Tower." Tesla died in 1943 with 300+ patents but countless more ideas that were never filed, many lost when the FBI seized his papers from the Hotel New Yorker. He described his AC motor concept to friends years before filing — with no timestamp, no proof, no recourse when others claimed parallel invention. The Tower would have given Tesla an immutable, Bitcoin-anchored record of every idea the moment he thought it — not when he could afford a patent attorney, not when he had a working prototype, not when Westinghouse agreed to fund it. Just: "I thought this. Here's the hash. Here's the block."
+
+The question extends beyond Tesla. Who else needed The Tower?
+
+- **Rosalind Franklin** — Her X-ray crystallography data (Photo 51) was shown to Watson and Crick without her knowledge. If she'd sealed her structural analysis in The Tower with a timestamp, the priority dispute over DNA's double helix would have been mathematically settled.
+- **Leibniz vs. Newton** — The calculus priority war consumed decades. Both invented it independently, but who was first? With Tower timestamps on their notebooks, the question answers itself.
+- **Antonio Meucci** — Filed a patent caveat for the telephone in 1871, couldn't afford the $10 renewal fee, lost priority to Alexander Graham Bell in 1876. A Tower entry costs 50 cents and never expires.
+- **Philo Farnsworth** — Sketched the electronic television concept for his high school teacher at age 14 in 1920. RCA's David Sarnoff spent years and millions in legal fees trying to prove Farnsworth wasn't first. A sealed Tower entry from a 14-year-old's notebook would have ended it instantly.
+- **Nikola Tesla (again)** — Described radio transmission principles before Marconi's 1896 patent. The Supreme Court eventually ruled in Tesla's favor in 1943 — the year he died. Too late. The Tower doesn't wait for courts.
+- **Katherine Johnson** — Her orbital trajectory calculations for NASA were attributed to the team for decades. Timestamped entries of her individual work would have made invisible contributions visible from day one.
+- **Every whistleblower ever** — "I knew about this and reported it internally on this date." Sealed, timestamped, revealed when safe. The Tower is the proof that institutions can't destroy.
+
+The Tower isn't just for inventors. It's for anyone who ever said something true before the world was ready to hear it. Conceived as a marketing and philosophical framing for The Tower platform.
+
+---
+
+*Total entries: 38*
+*Categories: 3 founding (disclosure), 12 patent claims (claim), 9 product descriptions (disclosure), 2 data assets (record), 1 architecture (claim), 3 intellectual contributions (disclosure), 3 origin story (record/itoldyouso), 5 trust architecture (claim/disclosure), 2 meta (itoldyouso/record)*
 
 *"If it's not in The Tower, you didn't say it."*
-*— Neill Groom, February 22, 2026*
+*— Neill Groom, March 14, 2026*

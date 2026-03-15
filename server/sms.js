@@ -4,7 +4,7 @@ const { sha256 } = require('./hasher');
 
 const MessagingResponse = twilio.twiml.MessagingResponse;
 
-const BASE_URL = process.env.BASE_URL || 'https://thetower.app';
+const BASE_URL = process.env.BASE_URL || 'https://thetower.one';
 
 async function findOrCreateUser(phone) {
     const phoneHash = sha256(phone);
