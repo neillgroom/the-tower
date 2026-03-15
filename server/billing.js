@@ -1,4 +1,4 @@
-const stripe = require('stripe')(process.env.STRIPE_SECRET);
+const stripe = process.env.STRIPE_SECRET ? require('stripe')(process.env.STRIPE_SECRET) : null;
 const db = require('./db');
 
 const BASE_URL = process.env.BASE_URL || 'https://thetower.one';
@@ -10,6 +10,7 @@ const CREDIT_PACKS = {
 };
 
 async function createCheckout(req, res) {
+    if (!stripe) return res.status(503).json({ error: 'Billing not configured' });
     const { phoneHash, pack } = req.body;
 
     const packInfo = CREDIT_PACKS[pack];
@@ -60,6 +61,7 @@ async function createCheckout(req, res) {
 }
 
 async function createProofCheckout(req, res) {
+    if (!stripe) return res.status(503).json({ error: 'Billing not configured' });
     const { phoneHash, entryId } = req.body;
 
     const userResult = await db.query('SELECT * FROM users WHERE phone_hash = $1', [phoneHash]);
@@ -102,6 +104,7 @@ async function createProofCheckout(req, res) {
 }
 
 async function handleWebhook(req, res) {
+    if (!stripe) return res.status(503).json({ error: 'Billing not configured' });
     const sig = req.headers['stripe-signature'];
     let event;
 
