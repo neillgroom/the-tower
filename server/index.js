@@ -8,6 +8,7 @@ const { createCheckout, createProofCheckout, handleWebhook } = require('./billin
 const { generateProof } = require('./proof');
 const { verifyByTextHash, verifyByBoundHash, verifyText, getStats } = require('./verify');
 const { runMerkleBatch, checkAnchors, retryPendingStamps } = require('./anchor');
+const { createEntry, createBatch, revealEntry } = require('./entries');
 const db = require('./db');
 
 const app = express();
@@ -32,7 +33,12 @@ app.post('/sms', handleSms);
 app.post('/api/checkout', createCheckout);
 app.post('/api/proof-checkout', createProofCheckout);
 
-// Entries
+// Entry creation (web/API)
+app.post('/api/entries/create', createEntry);
+app.post('/api/entries/create-batch', createBatch);
+app.post('/api/entries/reveal', revealEntry);
+
+// Entry listing
 app.get('/api/entries/:phoneHash', async (req, res) => {
     try {
         const { phoneHash } = req.params;
@@ -41,7 +47,7 @@ app.get('/api/entries/:phoneHash', async (req, res) => {
 
         const entries = await db.query(
             `SELECT id, hash_text, hash_bound, category, tags, source, status,
-                    btc_block, anchored_at, created_at
+                    tier, inscription, btc_block, anchored_at, created_at
              FROM entries WHERE user_id = $1 ORDER BY created_at DESC`,
             [user.rows[0].id]
         );
